@@ -17,7 +17,7 @@ export default function ProductDetail({ productDetail }) {
         setShowStatus1("Out Stock");
         setShowStatus2("Out Stock");
       }
-  },[productDetail.status])
+  },[productDetail])
   
   const dispatch = useDispatch();
   const handleChangeStatus = () => {

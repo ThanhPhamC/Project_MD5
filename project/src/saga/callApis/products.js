@@ -25,6 +25,7 @@ export function* getAllProduct() {
 }
 export function*creatNewProduct(action){
   let product =yield creatProductApi(action.payload)
+ 
   yield put(act_redux_creat_product(product.data))
 }
 export function* updateProduct(action) {

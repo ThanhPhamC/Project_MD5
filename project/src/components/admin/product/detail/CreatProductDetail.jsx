@@ -10,6 +10,7 @@ export default function CreatProductDetail({ lastProduct }) {
   let listProductDetail = useSelector((state) => state.listProductDetail);
   let listColor = useSelector((state) => state.listColor);
   let listSize = useSelector((state) => state.listSize);
+  const [recall,setRecall]= useState(true)
   const [sizeId, setSizeId] = useState("");
   const [colorId, setColorId] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -45,7 +46,9 @@ export default function CreatProductDetail({ lastProduct }) {
         let check= false
          listProductDetail.forEach((detail) => {
           if(detail.color.id==colorId&& detail.size.id==sizeId){
+            console.log("vao day",detail.quantity);
             detail.quantity=parseInt(detail.quantity)+parseInt(quantity)
+            console.log("cap nhap",detail.quantity);
             dispatch(act_saga_edit_product_detail(detail))
             check=true
             return;
@@ -55,6 +58,7 @@ export default function CreatProductDetail({ lastProduct }) {
           dispatch(act_saga_creat_product_detail(productDetail))
         }
     }
+    setRecall(!recall)
   };
 
   return (
@@ -80,7 +84,7 @@ export default function CreatProductDetail({ lastProduct }) {
               </label>
               <select
                 className="form-select"
-                onChange={(e) => setSizeId(e.target.value)}
+                onChange={(e) => setSizeId(e.target.value)} values={sizeId}
               >
                 <option>Choose size...</option>
                 {listSize?.map((size) => {
@@ -104,7 +108,7 @@ export default function CreatProductDetail({ lastProduct }) {
               </label>
               <select
                 className="form-select"
-                onChange={(e) => setColorId(e.target.value)}
+                onChange={(e) => setColorId(e.target.value)} value={colorId}
               >
                 <option>Choose color...</option>
                 {listColor?.map((color) => {
@@ -124,7 +128,7 @@ export default function CreatProductDetail({ lastProduct }) {
               </span>
               <input
                 type="text"
-                onChange={(e) => setExportDetail(e.target.value)}
+                onChange={(e) => setExportDetail(e.target.value)} value={exportDetail}
                 className="form-control"
                 placeholder="Export price..."
               />
@@ -137,7 +141,7 @@ export default function CreatProductDetail({ lastProduct }) {
                 <i className="bi bi-sort-numeric-down" />
               </span>
               <input
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={(e) => setQuantity(e.target.value)} value={quantity}
                 type="text"
                 className="form-control"
                 placeholder="Quantity detail..."
